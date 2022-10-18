@@ -1,13 +1,13 @@
 {
-    "name": "laravel-zero/laravel-zero",
-    "description": "The Laravel Zero Framework.",
-    "keywords": ["framework", "laravel", "laravel zero", "console", "cli"],
-    "homepage": "https://laravel-zero.com",
+    "name": "michael-brooks/sam",
+    "description": "Sam is a simple automation tool built with Laravel Zero",
+    "keywords": ["automation", "laravel", "laravel zero", "console", "cli"],
+    "homepage": "https://michaelbrooks.co.uk",
     "type": "project",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/laravel-zero/laravel-zero/issues",
-        "source": "https://github.com/laravel-zero/laravel-zero"
+        "issues": "https://github.com/Michael-Brooks/sam/issues",
+        "source": "https://github.com/Michael-Brooks/sam"
     },
     "authors": [
         {

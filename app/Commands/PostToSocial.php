@@ -40,7 +40,7 @@ class PostToSocial extends Command
 
         $latestPost = $readRss->channel->item;
 
-        $posts = DB::table('posts');
+        $posts = DB::table('posts')->orderBy('id', 'desc');
 
         if ($posts->first() === null || $latestPost->title != $posts->first()->name) {
             $posts->insert(
@@ -74,10 +74,11 @@ class PostToSocial extends Command
                 'status' => $latestPost->title . ' #michaelbrooks #blog #blogger #writer ' . $latestPost->link,
             ]);
 
-            render('Latest blog post posted successfully.');
+            shell_exec('notify-send "Latest blog post posted successfully."');
+            exit;
         }
 
-        render('Latest blog post has already been posted.');
+        shell_exec('notify-send "Latest blog post has already been posted."');
     }
 
     /**
