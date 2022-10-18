@@ -2,10 +2,12 @@
 
 namespace App\Commands;
 
+use Exception;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use LaravelZero\Framework\Commands\Command;
+use SimpleXMLElement;
 use function Termwind\render;
 
 class PostToSocial extends Command
@@ -27,15 +29,14 @@ class PostToSocial extends Command
     protected $description = 'Command description';
 
     /**
-     * Execute the console command.
-     *
      * @return void
+     * @throws Exception
      */
-    public function handle()
+    public function handle(): void
     {
         $url = env('MASTODON_URL');
         $content = file_get_contents(env('RSS_URL'));
-        $readRss = new \SimpleXMLElement($content);
+        $readRss = new SimpleXMLElement($content);
 
         $latestPost = $readRss->channel->item;
 
@@ -67,7 +68,7 @@ class PostToSocial extends Command
                 'scope' => 'read write',
             ])->body());
 
-            $post = Http::withHeaders([
+            Http::withHeaders([
                 'Authorization' => 'Bearer ' . $bearer->access_token
             ])->post($url . '/api/v1/statuses', [
                 'status' => $latestPost->title . ' #michaelbrooks #blog #blogger #writer ' . $latestPost->link,
@@ -82,7 +83,7 @@ class PostToSocial extends Command
     /**
      * Define the command's schedule.
      *
-     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     * @param Schedule $schedule
      * @return void
      */
     public function schedule(Schedule $schedule): void

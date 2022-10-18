@@ -24,7 +24,8 @@
         "laravel-zero/framework": "^9.2",
         "nunomaduro/laravel-console-dusk": "dev-master",
         "nunomaduro/laravel-desktop-notifier": "^2.6",
-        "nunomaduro/termwind": "^1.14"
+        "nunomaduro/termwind": "^1.14",
+      "ext-simplexml": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
