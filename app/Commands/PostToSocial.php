@@ -10,7 +10,6 @@ use function Termwind\render;
 
 class PostToSocial extends Command
 {
-    private string $url = 'https://mastodon.social';
     private string $code = '';
 
     /**
@@ -34,6 +33,7 @@ class PostToSocial extends Command
      */
     public function handle()
     {
+        $url = env('MASTODON_URL');
         $content = file_get_contents(env('RSS_URL'));
         $readRss = new \SimpleXMLElement($content);
 
@@ -58,7 +58,7 @@ class PostToSocial extends Command
                 });
             }
 
-            $bearer = json_decode(Http::post($this->url . '/oauth/token', [
+            $bearer = json_decode(Http::post($url . '/oauth/token', [
                 'client_id' => env('MASTODON_KEY'),
                 'client_secret' => env('MASTODON_SECRET'),
                 'redirect_uri' => env('MASTODON_REDIRECT'),
@@ -69,8 +69,8 @@ class PostToSocial extends Command
 
             $post = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $bearer->access_token
-            ])->post($this->url . '/api/v1/statuses', [
-                'status' => $latestPost->title . ' ' . $latestPost->link,
+            ])->post($url . '/api/v1/statuses', [
+                'status' => $latestPost->title . ' #michaelbrooks #blog #blogger #writer ' . $latestPost->link,
             ]);
 
             render('Latest blog post posted successfully.');
