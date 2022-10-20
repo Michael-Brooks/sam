@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use LaravelZero\Framework\Commands\Command;
 use SimpleXMLElement;
-use function Termwind\render;
 
-class PostToSocial extends Command
+class PostToMastodon extends Command
 {
     private string $code = '';
 
@@ -26,7 +25,7 @@ class PostToSocial extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Get the latest blog post from an RSS feed and post it to Mastodon if not done so already.';
 
     /**
      * @return void
