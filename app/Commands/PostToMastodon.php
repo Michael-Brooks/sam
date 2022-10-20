@@ -73,11 +73,11 @@ class PostToMastodon extends Command
                 'status' => $latestPost->title . ' #michaelbrooks #blog #blogger #writer ' . $latestPost->link,
             ]);
 
-            shell_exec('notify-send "Latest blog post posted successfully."');
+            $this->info('Latest blog post has been posted successfully!');
             exit;
         }
 
-        shell_exec('notify-send "Latest blog post has already been posted."');
+        $this->info('Latest blog post has already been posted!');
     }
 
     /**

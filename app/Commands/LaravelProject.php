@@ -2,7 +2,6 @@
 
 namespace App\Commands;
 
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class LaravelProject extends Command
@@ -28,6 +27,9 @@ class LaravelProject extends Command
      */
     public function handle(): void
     {
-        shell_exec('cd ~/code && composer create-project laravel/laravel ' . $this->argument('name'));
+        $argumentName = $this->argument('name');
+        shell_exec('cd ~/code && composer create-project laravel/laravel ' . $argumentName);
+
+        $this->info('Project ' . $argumentName . ' has been created!');
     }
 }
